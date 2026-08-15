@@ -5,12 +5,14 @@ Simple Python module for parsing Pokepastes. The syntax is outlined here: https:
 ## Installing
 
 ```
-pip install git+https://github.com/mikewVGC/paste-parser.git@1.0.0
+pip install git+https://github.com/mikewVGC/paste-parser.git
 ```
 
 ## Usage
 
 ```
+from paste_parser.paste_parser import PasteParser
+
 parser = PasteParser()
 
 with open("your/pokepaste/file", 'r') as pastefile:
@@ -21,7 +23,7 @@ with open("your/pokepaste/file", 'r') as pastefile:
 
 ## Build The Module
 
-Build the module:
+To build the module:
 
 ```
 python -m venv env
