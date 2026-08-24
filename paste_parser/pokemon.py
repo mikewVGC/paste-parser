@@ -12,6 +12,7 @@ class Pokemon():
     nickname:str = ""
     gender:str = ""
     item:str = ""
+    ability:str = ""
     moves:list = field(default_factory=list)
     shiny:bool = False
     nature:str = ""
