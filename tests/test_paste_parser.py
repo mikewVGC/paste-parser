@@ -40,6 +40,7 @@ class TestPasteParser(unittest.TestCase):
             mons = parser.parse(pastefile.read())
 
         self.assertEqual(mons[0].species, "Calyrex-Shadow")
+        self.assertEqual(mons[0].ability, "As One (Spectrier)")
         self.assertEqual(mons[0].stats["atk"]["iv"], 0)
 
         self.assertEqual(mons[1].species, "Talonflame")
@@ -48,3 +49,4 @@ class TestPasteParser(unittest.TestCase):
 
         self.assertEqual(mons[4].species, "Amoonguss")
         self.assertEqual(mons[4].nickname, "Nap Time")
+        self.assertEqual(mons[4].gender, "F")
