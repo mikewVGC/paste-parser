@@ -39,14 +39,25 @@ class TestPasteParser(unittest.TestCase):
         with open("tests/pastes/full-ots-sv.paste", 'r') as pastefile:
             mons = parser.parse(pastefile.read())
 
-        self.assertEqual(mons[0].species, "Calyrex-Shadow")
-        self.assertEqual(mons[0].ability, "As One (Spectrier)")
-        self.assertEqual(mons[0].stats["atk"]["iv"], 0)
+        self.assertEqual(mons[1].species, "Calyrex-Shadow")
+        self.assertEqual(mons[1].ability, "As One (Spectrier)")
+        self.assertEqual(mons[1].stats["atk"]["iv"], 0)
 
-        self.assertEqual(mons[1].species, "Talonflame")
-        self.assertEqual(mons[1].item, "")
-        self.assertEqual(mons[1].stats["hp"]["ev"], 252)
+        self.assertEqual(mons[2].species, "Talonflame")
+        self.assertEqual(mons[2].item, "")
+        self.assertEqual(mons[2].stats["hp"]["ev"], 252)
 
-        self.assertEqual(mons[4].species, "Amoonguss")
-        self.assertEqual(mons[4].nickname, "Nap Time")
-        self.assertEqual(mons[4].gender, "F")
+        self.assertEqual(mons[0].species, "Amoonguss")
+        self.assertEqual(mons[0].nickname, "Nap Time")
+        self.assertEqual(mons[0].gender, "F")
+
+
+    def test_problem_ots_sheet(self):
+
+        parser = PasteParser()
+
+        with open("tests/pastes/problem-ots-sv.paste", 'r') as pastefile:
+            mons = parser.parse(pastefile.read())
+
+        self.assertEqual(len(mons), 6)
+
