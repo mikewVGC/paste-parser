@@ -22,7 +22,7 @@ class PasteParser:
             r"(?P<species>[A-Za-z0-9 .:'-]+?)"
             r"(?(nickname)\))"
             r"(?: \((?P<gender>[MF])\))?"
-            r"(?: @ (?P<item>[A-Z][A-Za-z -']+?))?"
+            r"(?: @ (?P<item>[A-Z][A-Za-z '-]+?))?"
             r"(?: *)$"
         )
         self.prop_reg = r"^([A-Z][A-Za-z ]+): (.+)( *)$"
