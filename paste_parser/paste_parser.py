@@ -17,7 +17,7 @@ class PasteParser:
         self.stat_reg = r"^[I|E]Vs: (\d+ HP)?( / )?(\d+ Atk)?( / )?(\d+ Def)?( / )?(\d+ SpA)?( / )?(\d+ SpD)?( / )?(\d+ Spe)?( *)$"
 
         # hand woven regular expressions
-        self.name_regex = r"^([A-z][A-z '!?-]+)(?: \(([A-z '!?-]+)\))?(?: \(([MF])\))?(?:( @ )([A-Z][A-z '-]+?))?( *)$"
+        self.name_regex = r"^([A-zÀ-ÿ][A-zÀ-ÿ\u3040-\u309F\u30A0-\u30FF\u4E00-\u9FAF '.!?^_-]+)(?: \(([A-z '-]+)\))?(?: \(([MF])\))?(?:( @ )([A-Z][A-z '-]+?))?( *)$"
         self.prop_reg = r"^([A-Z][A-Za-z ]+): (.+)( *)$"
         self.nature_reg = r"^([A-Z][a-z]+) Nature( *)$"
 
