@@ -17,7 +17,14 @@ class PasteParser:
         self.stat_reg = r"^[I|E]Vs: (\d+ HP)?( / )?(\d+ Atk)?( / )?(\d+ Def)?( / )?(\d+ SpA)?( / )?(\d+ SpD)?( / )?(\d+ Spe)?( *)$"
 
         # hand woven regular expressions
-        self.name_regex = r"^([A-zÀ-ÿ][A-zÀ-ÿ\u3040-\u309F\u30A0-\u30FF\u4E00-\u9FAF '.!?^_-]+)(?: \(([A-z '-]+)\))?(?: \(([MF])\))?(?:( @ )([A-Z][A-z '-]+?))?( *)$"
+        self.name_regex = (
+            r"^(?:(?P<nickname>.+?) \()?"
+            r"(?P<species>[A-Za-z0-9 .:'-]+?)"
+            r"(?(nickname)\))"
+            r"(?: \((?P<gender>[MF])\))?"
+            r"(?: @ (?P<item>[A-Z][A-Za-z -]+?))?"
+            r"(?: *)$"
+        )
         self.prop_reg = r"^([A-Z][A-Za-z ]+): (.+)( *)$"
         self.nature_reg = r"^([A-Z][a-z]+) Nature( *)$"
 
@@ -49,25 +56,14 @@ class PasteParser:
                 continue
 
             # fires for the name/item/etc (nature has to go first since this also matches that)
-            matches = re.findall(self.name_regex, line)
-            if len(matches):
-                if len(matches[0][0]) and not len(matches[0][1]):
-                    mon.species = matches[0][0]
-                elif len(matches[0][0]) and len(matches[0][1]):
-                    if matches[0][1] in ('M', 'F'):
-                        mon.species = matches[0][0]
-                        mon.gender = matches[0][1]
-                    else:
-                        mon.nickname = matches[0][0]
-                        mon.species = matches[0][1]
+            match = re.match(self.name_regex, line)
+            if match and not len(mon.species):
+                matches = match.groupdict(default="")
 
-                # this will always be gender
-                if len(matches[0][2]):
-                    mon.gender = matches[0][2]
-
-                # this will always be the item
-                if len(matches[0][4]):
-                    mon.item = matches[0][4]
+                mon.nickname = matches['nickname']
+                mon.species = matches['species']
+                mon.gender = matches['gender']
+                mon.item = matches['item']
 
                 continue
 
